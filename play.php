@@ -47,7 +47,7 @@
 							controls preload="auto"width="auto" height="480"
 							data-setup='{"example_option":true}'>
 							<source src=<?php echo "/files/".rawurlencode($_GET["file"]);?> type='video/mp4' />
-						
+							
 				</div>
 			</div>
 		</div>
