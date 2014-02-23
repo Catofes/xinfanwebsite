@@ -5,14 +5,22 @@
 	font-size:16px;
 	outline:none;
 }
+body.ABP-Full-Window {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	/* Fix for IE6 full-window. http://www.cssplay.co.uk/layouts/fixed.html */
+	overflow-y: auto;
+}
 .ABP-Unit.ABP-FullScreen{
 	top:0;
 	left:0;
 	right:0;
 	bottom:0;
-	width:auto !important;
-	height:auto !important;
+	width:100% !important;
+	height:100% !important;
 	position:fixed;
+	overflow: hidden;
 	z-index:9999;
 }
 .ABP-Unit .ABP-Video{
@@ -151,7 +159,7 @@
 	background-size:cover;
 	top:0;right:40px;bottom:0;
 }
-.ABP-Unit .ABP-Control .progress-bar {
+.ABP-Unit .ABP-Control .abpprogress-bar {
 	position:absolute;
 	overflow:hidden;
 	cursor:default;
@@ -159,14 +167,14 @@
 	background:#000;
 }
 
-.ABP-Unit .ABP-Control .progress-bar .bar{
+.ABP-Unit .ABP-Control .abpprogress-bar .bar{
 	position:absolute;
 	left:0;top:0;bottom:0;
 	background:#4399ee;
 	opacity:0.4;
 }
 
-.ABP-Unit .ABP-Control .progress-bar .bar.dark{
+.ABP-Unit .ABP-Control .abpprogress-bar .bar.dark{
 	background:#0099cc;
 	opacity:1;
 }

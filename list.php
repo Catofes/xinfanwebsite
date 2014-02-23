@@ -22,7 +22,7 @@ function fenge($file,$path)
 {
 	global $fan_list;
 	if(is_dir($path.$file))
-		return array("type"=>"floder","file"=>$file);
+		return array("type"=>"folder","file"=>$file);
 	$dot=explode(".",$file);
 	if(end($dot)==="mp4")
 	{   
@@ -58,11 +58,11 @@ function getlist($dir)
 	}
 	return $filelist;				
 }
-function showfloder($filelist,$path="")
+function showfolder($filelist,$path="")
 {
 	while(list($key,$val) = each($filelist))
-		if($val["type"]==="floder") 
-			echo "Floder:   <a href=/list.php?path=".rawurlencode($path.$val["file"])."/>".$val["file"]."</a><br>";
+		if($val["type"]==="folder") 
+			echo "Folder:   <a href=/list.php?path=".rawurlencode($path.$val["file"])."/>".$val["file"]."</a><br>";
 }
 function showmp4($filelist,$path=""){
 	while (list($key, $val) = each($filelist))
@@ -93,7 +93,7 @@ function CheckDir($post)
 	$path=explode("..",$linpath)[0];
 	if(!is_dir($DIR.$path))
 	{
-		echo "This is not a floder.<br></body></html>";
+		echo "This is not a folder.<br></body></html>";
 		exit();
 	}
     chdir($DIR.$path);
@@ -162,7 +162,7 @@ $filelist=getlist($DIR.$path);
 				</div>
 				<div class="cotainer">
 <?
-showfloder($filelist,$path);
+showfolder($filelist,$path);
 showmp4($filelist,$path);
 showother($filelist,$path);
 ?>

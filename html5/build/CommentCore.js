@@ -446,10 +446,7 @@ function CommentManager(stageObject){
 			cmt.style.opacity = this.def.opacity;
 		if(data.alphaFrom != null)
 			cmt.style.opacity = data.alphaFrom;
-		if(cmt.mode==4||cmt.mode==5||cmt.mode>7)
-		  cmt.ttl=Math.round(4000 * this.def.globalScale);
-		else
-			cmt.ttl = Math.round(8000 * this.def.globalScale);
+		cmt.ttl = Math.round(4000 * this.def.globalScale);
 		cmt.dur = cmt.ttl;
 		if(cmt.mode === 1 || cmt.mode === 6 || cmt.mode === 2){
 			cmt.ttl *= this.def.scrollScale;

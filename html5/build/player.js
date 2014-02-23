@@ -158,7 +158,7 @@ var ABP = {
 		if(_p.length <= 0) return;
 		ABPInst.btnPlay = _p[0];
 		/** Bind the Loading Progress Bar **/
-		var pbar = playerUnit.getElementsByClassName("abpprogress-bar");
+		var pbar = playerUnit.getElementsByClassName("progress-bar");
 		if(pbar.length <= 0) return;
 		ABPInst.barHitArea = pbar[0];
 		var pbars = pbar[0].getElementsByClassName("bar");
@@ -250,10 +250,8 @@ var ABP = {
 				ABPInst.state.fullscreen = hasClass(playerUnit, "ABP-FullScreen");
 				if(!ABPInst.state.fullscreen){
 					addClass(playerUnit, "ABP-FullScreen");
-					addClass(document.body, "ABP-Full-Window");
 				}else{
 					removeClass(playerUnit, "ABP-FullScreen");
-					removeClass(document.body, "ABP-Full-Window");
 				}
 				ABPInst.state.fullscreen = !ABPInst.state.fullscreen;
 				if(ABPInst.cmManager)
