@@ -107,5 +107,33 @@ function ABPinit(){
 		}
 	}
 	this.binddm();
+	this.CommentLoader = function(url,xcm,callback){
+		if(callback == null)
+		  callback = function(){return;};
+		if (window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}   
+		else{
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}   
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send();
+		var cm = xcm;
+		xmlhttp.onreadystatechange = function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				if(navigator.appName == 'Microsoft Internet Explorer'){
+					var f = new ActiveXObject("Microsoft.XMLDOM");
+					f.async = false;
+					f.loadXML(xmlhttp.responseText);
+					cm.load(BilibiliParser(f));
+					callback();
+				}else{
+					cm.load(BilibiliParser(xmlhttp.responseXML));
+					callback();
+				}   
+			}   
+		}   
+	}
+
 };
 
