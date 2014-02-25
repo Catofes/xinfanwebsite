@@ -117,19 +117,21 @@ window.addEventListener("load",function(){
 			</div>
 			<div class="jumbotron" style="padding-top:1px;padding-bottom:10px;">
 				<div class="row">
-					<div class="col-xs-8 col-sm-6">
+					<div class="col-xs-8">
 						<h3><? echo $_GET["name"]."  ".$_GET["num"];?></h3>
 					</div>
-					<div class="col-xs-4 col-sm-3" style="float:right;margin-top:5px">
-						<div class="input-group">
-							<input type="text" id="theavcode" class="form-control" placeholder="AVCode">
-							<span class="input-group-btn">
+					<div class="col-xs-4">
+						<div style="float:right;margin-top:auto;width:150px">
+							<div class="input-group" style="float:right">
+								<input type="text" id="theavcode" class="form-control" placeholder="AVCode">
 								<input type="text" id="thepage" class="form-control" placeholder="Page">
-								<button class="btn btn-default" type="button" onclick="avgo()">Go!</button>
-							</span>
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" onclick="avgo()">Go!</button>
+								</span>
+							</div>
 						</div>
+						<h3 id="status" class="text-muted credit" style="float:rght"></h3>
 					</div>
-						<div style="float:right;margin-top:15px"><p id="status" class="text-muted credit"></p></div>
 				</div>
 			</div>
 			<div class="container" style="border-left:auto; border-right:auto;">
@@ -153,7 +155,7 @@ window.addEventListener("load",function(){
 		</div>
 	</div>
 	<script src="dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+	</body>
+		</html>
 
 
