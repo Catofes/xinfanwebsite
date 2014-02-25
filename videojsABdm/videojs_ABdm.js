@@ -1,9 +1,13 @@
-vjs.plugin('ABP', ABPinit);
+videojs.plugin('ABP', ABPinit);
 function ABPinit(){
+	//this.TOUCH_ENABLED = !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
 	danmu_div = document.createElement('div');
 	danmu_div.className = 'vjs-danmu';
-	this.el().insertBefore(danmu_div,this.el().getElementsByClassName('vjs-poster')[0]);
-	//vjs.Player.prototype.binddm = function(playerUnit){
+	//if (this.TOUCH_ENABLED && this.options()['nativeControlsForTouch'] !== false) {
+	//	this.el().insertBefore(danmu_div,this.el().children[0]);	
+	//}else{
+		this.el().insertBefore(danmu_div,this.el().getElementsByClassName('vjs-poster')[0]);
+	//}
 	danmu_control = document.createElement('dev');
 	danmu_control.className= 'vjs-danmu-control vjs-menu-button vjs-control';
 	danmu_control_content = document.createElement('span');
@@ -11,39 +15,15 @@ function ABPinit(){
 	danmu_control.appendChild(danmu_control_content);
 	this.el().getElementsByClassName('vjs-control-bar')[0].appendChild(danmu_control);
 	this.binddm=function(){
-		video=this.tag;
+		video=this.el().children[0];
 		if(typeof CommentManager !== "undefined"){
 			this.cmManager = new CommentManager(this.el().getElementsByClassName('vjs-danmu')[0]);
 			this.cmManager.display = true;
 			this.cmManager.init();
 			this.cmManager.clear();
-			this.tag.cmManager=this.cmManager;
+			video.cmManager=this.cmManager;
 			window.cmManager=this.cmManager;
 			var lastPosition = 0;
-			/*if(1){
-			  var autosize = function(){
-			  if(vjs.Html5.prototype.width === 0 || vjs.Html5.prototype.height === 0){
-			  return;
-			  }
-			  var aspectRatio = vjs.Html5.prototype.height / vjs.Html5.prototype.width;
-			// We only autosize within the bounds
-			var boundW = vjs.Html5.prototype.width;
-			var boundH = vjs.Html5.prototype.height; 
-			var oldASR = boundH / boundW;
-
-			if(oldASR < aspectRatio){
-			playerUnit.style.width = (boundH / aspectRatio) + "px";
-			playerUnit.style.height = boundH  + "px";
-			}else{
-			playerUnit.style.width = boundW + "px";
-			playerUnit.style.height = (boundW * aspectRatio) + "px";
-			}
-
-			vjs.Player.prototype.cmManager.setBounds();
-			};
-			video.addEventListener("loadedmetadata", autosize);
-			autosize();
-			}*/
 			video.addEventListener("progress", function(){
 				if(lastPosition == video.currentTime){
 					video.hasStalled = true;
@@ -107,7 +87,7 @@ function ABPinit(){
 		}
 	}
 	this.binddm();
-	this.CommentLoader = function(url,xcm,callback){
+	this.CommentLoader = function(url,callback){
 		if(callback == null)
 		  callback = function(){return;};
 		if (window.XMLHttpRequest){
@@ -118,7 +98,7 @@ function ABPinit(){
 		}   
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send();
-		var cm = xcm;
+		var cm = this.cmManager;
 		xmlhttp.onreadystatechange = function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				if(navigator.appName == 'Microsoft Internet Explorer'){
@@ -126,12 +106,13 @@ function ABPinit(){
 					f.async = false;
 					f.loadXML(xmlhttp.responseText);
 					cm.load(BilibiliParser(f));
-					callback();
+					callback(true);
 				}else{
 					cm.load(BilibiliParser(xmlhttp.responseXML));
-					callback();
+					callback(true);
 				}   
-			}   
+			}else
+			  callback(false);
 		}   
 	}
 
