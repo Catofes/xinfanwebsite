@@ -1,4 +1,8 @@
-<?$timea=microtime();?>
+<?$timea=microtime();
+header('Access-Control-Allow-Origin: * ');
+header('Access-Control-Allow-Methods:POST,GET');
+header('Access-Control-Allow-Credentials:true');
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,64 +14,88 @@
 		<meta name="author" content="">
 		<link href="dist/css/bootstrap.css" rel="stylesheet">
 		<script type="text/javascript" src="/dist/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="abplayer/mobile.js"></script>
-<script type="text/javascript" src="abplayer/CommentCore.js"></script>
-<script type="text/javascript" src="abplayer/libxml.js"></script>
-<script type="text/javascript" src="abplayer/Parsers.js"></script>
+		<script src="/videojsABdm/CommentCore.js"></script>
+		<script src="/videojsABdm/Parsers.js"></script>
 		<link href="/video-js/video-js.css" rel="stylesheet">
-		<script src="/video-js/video.dev.js"></script>
-	</head>
-	<body>
-		<div class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="#" class="navbar-brand">新番</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li><a href="index.php">一月新番</a></li>
-						<li><a href="list.php">文件列表</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<script src="/video-js/video.js"></script>
+		<link href="/videojsABdm/videojs_ABdm.css" rel="stylesheet">
+		<script src="/videojsABdm/videojs_ABdm.js"></script>
+		<script src="play.js"></script>
+<script type="text/javascript">
+window.addEventListener("load",function(){
+	window.thevideojs = videojs("example_video_1");
+	thevideojs.ABP();
+});
+</script>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
-			<div class="row row-offcanvas row-offcanvas-right">
-				<div class="col-xs-12 col-sm-9">
-					<p class="pull-right visible-xs">
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">下拉菜单</button>
-					</p>
-				</div>
-				<div class="jumbotron" style="padding-top:1px;padding-bottom:10px;">
-					<h3><? echo $_GET["name"]."  ".$_GET["num"];?></h3>
-				</div>
-				<div class="container" style="border-left:auto; border-right:auto;">
-							<video id="example_video_1" class="video-js vjs-default-skin"
-							controls preload="auto"width="auto" height="480"
-							data-setup='{"example_option":true}'>
-							<source src=<?php echo "/files/".rawurlencode($_GET["file"]);?> type='video/mp4' />
-							
-				</div>
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">新番</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.php">一月新番</a></li>
+					<li><a href="list.php">文件列表</a></li>
+				</ul>
 			</div>
 		</div>
-        <div class="footer">
-			<div class="container">
-				<p class="text-muted credit">
-				Provide by
-				<a href="about.php">Catofes</a>
-				.Generate time:
-				<? echo $timeb=microtime()-$timea;?>
-				s  
+	</div>
+	<div class="container">
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9">
+				<p class="pull-right visible-xs">
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">下拉菜单</button>
 				</p>
 			</div>
+			<div class="jumbotron" style="padding-top:1px;padding-bottom:10px;">
+				<div class="row">
+					<div class="col-xs-8">
+						<h3><? echo $_GET["name"]."  ".$_GET["num"];?></h3>
+					</div>
+					<div class="col-xs-4">
+						<div style="float:right;margin-top:auto;width:150px">
+							<div class="input-group" style="float:right">
+								<input type="text" id="theavcode" class="form-control" placeholder="AVCode">
+								<input type="text" id="thepage" class="form-control" placeholder="Page">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" onclick="avgo()">Go!</button>
+								</span>
+							</div>
+						</div>
+						<h3 id="status" class="text-muted credit" style="float:rght"></h3>
+					</div>
+				</div>
+			</div>
+			<a href id=bilibili>弹幕地址：未载入</a>
+			<div class="container" style="border-left:auto; border-right:auto;">
+				<video id="example_video_1" class="video-js vjs-default-skin"
+				controls preload="auto"width="auto" height="480"
+				data-setup='{"example_option":true}'>
+				<source src=<?php echo "/files/".rawurlencode($_GET["file"]);?> type='video/mp4' />
+
+			</div>
 		</div>
-		<script src="dist/js/bootstrap.min.js"></script>
-	</body>
-</html>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<p class="text-muted credit">
+			Provide by
+			<a href="about.php">Catofes</a>
+			.Generate time:
+			<? echo $timeb=microtime()-$timea;?>
+			s  
+			</p>
+		</div>
+	</div>
+	<script src="dist/js/bootstrap.min.js"></script>
+</body>
+		</html>
 
 
