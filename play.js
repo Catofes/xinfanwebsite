@@ -63,7 +63,8 @@ function echoinfo(inf){
 
 function j_DmLoad(data){
 	if(data.cid>0){
-		document.getElementById("bilibili").textContent=data.title;
+		document.getElementById("bilibili").textContent="弹幕地址: "+data.title;
+		document.getElementById("bilibili").href="http://www.bilibili.tv/video/av"+window.avcode;
 		reload(data.cid);
 		return;
 		echoinfo(201);
@@ -84,6 +85,7 @@ function DmGetby_av(av,page){
 			document.getElementsByTagName('head')[0].appendChild(script); 
 		}
 	}
+	window.avcode=av;
 	xmlhttp.open("GET","/danmu.php?f=gav&av="+av+'&page='+page,true);
 	xmlhttp.send();
 }

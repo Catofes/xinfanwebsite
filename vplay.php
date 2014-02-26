@@ -73,7 +73,7 @@ window.addEventListener("load",function(){
 					</div>
 				</div>
 			</div>
-			<a href id=bilibili>弹幕地址：未载入</a>
+			<a href="#" id=bilibili>弹幕地址：未载入</a>
 			<div class="container" style="border-left:auto; border-right:auto;">
 				<video id="example_video_1" class="video-js vjs-default-skin"
 				controls preload="auto"width="auto" height="480"
