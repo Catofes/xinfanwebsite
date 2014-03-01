@@ -167,7 +167,7 @@ function DmSearchby_name(name,num){
 			document.getElementsByTagName('head')[0].appendChild(script);
 		}
 	}
-	xmlhttp.open("GET","/danmu.php?f=search&name="+name+"&num="+num+"&page="+window.pageid,true);
+	xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(name)+"&num="+num+"&page="+window.pageid,true);
 	xmlhttp.send();
 
 }
