@@ -35,7 +35,11 @@ function fenge($file,$path,$xiangduipath)
 				else 
 					$cname=substr($xiangduipath,0,-1);
 			}
-			return array("type"=>"mp4","name"=>substr($linshi[1],1),"num"=>substr($linshi[2],1),"zimu"=>substr($linshi[0],1),"cname"=>$cname,"file"=>$file);
+			$cname=str_replace("_"," ",$cname);
+			$num=explode("v",substr($linshi[2],1),2)[0];
+			if(!is_numeric(trim(eregi_replace("[^0-9]","",$num))))
+				$num=substr(trim(eregi_replace("[^0-9]","",$file)),0,2);   	
+			return array("type"=>"mp4","name"=>substr($linshi[1],1),"num"=>$num,"zimu"=>substr($linshi[0],1),"cname"=>$cname,"file"=>$file);
 		}
 		else return array("type"=>"mp4","name"=>$linshi[0],"num"=>"unknow","zimu"=>"unknow","cname"=>$linshi[0],"file"=>$file);	
 	}   
@@ -81,15 +85,15 @@ function showmp4($filelist,$path=""){
 			echo "<a href=/play.php?file=".rawurlencode($path.$val["file"])."&name=".rawurlencode($val["cname"])."&num=".rawurlencode($val["num"]).">".$val["cname"]."  ".$val["name"]."    ".$val["num"]."</a> ";
 			echo "<a href=/files/".rawurlencode($path.$val["file"]).">raw</a><br>";
 		}
-		}
-		}
-		function showother($filelist,$path=""){
-			while (list($key, $val) = each($filelist))
-			{
-				if($val["type"]==="other") 
-				{
-					echo "Other:       <a href=/files/".rawurlencode($path.$val["file"]).">".$val["file"]."</a>";
-					echo "&nbsp &nbsp <a href=/play.php?file=/".rawurlencode($path.$val["file"])."&name=".rawurlencode($val["cname"])."&num=".rawurlencode($val["num"]).">"."<s>Try to play it.</s></a><br>";
+	}
+}
+function showother($filelist,$path=""){
+	while (list($key, $val) = each($filelist))
+	{
+		if($val["type"]==="other") 
+		{
+			echo "Other:       <a href=/files/".rawurlencode($path.$val["file"]).">".$val["file"]."</a>";
+			echo "&nbsp &nbsp <a href=/play.php?file=/".rawurlencode($path.$val["file"])."&name=".rawurlencode($val["cname"])."&num=".rawurlencode($val["num"]).">"."<s>Try to play it.</s></a><br>";
 		}
 	}	
 }	

@@ -25,8 +25,6 @@ function reload(cid){
 function CL_finish(statu){
 	if(statu==true)
 	  echoinfo(101);
-	else
-	  echoinfo(201);
 }
 
 function echoinfo(inf){
@@ -96,7 +94,10 @@ function j_Dmspid(data){
 			echoinfo(305);
 			DmGetby_av(data.aid,1);
 		}
-		else echoinfo(202);
+		else {
+			echoinfo(202);
+			DmSearchby_name(window.Request['name'],window.Request['num']);
+		}
 	}
 	else {
 		echoinfo(304);
@@ -123,7 +124,7 @@ function DmGetby_spid(spid){
 }
 
 function j_Dmspt(data){
-	if(data.code==0){
+	if(data.spid>0){
 		echoinfo(303);
 		DmGetby_spid(data.spid);
 	}
@@ -137,6 +138,12 @@ function j_DmSearch(data){
 	if(data.code==0){
 		if(data.property.result>0){
 			echoinfo(305);
+			if(window.pageid==data.page)
+			  window.pageid=0;
+			if(!data.result[0].aid){
+				echoinfo(202);
+				return;
+			}
 			DmGetby_av(data.result[0].aid,1);
 			return;
 		}
@@ -145,6 +152,9 @@ function j_DmSearch(data){
 }
 function DmSearchby_name(name,num){
 	var xmlhttp;
+	if(!window.pageid)
+		window.pageid=0;
+	window.pageid++;
 	if (window.XMLHttpRequest)
 	  xmlhttp=new XMLHttpRequest();
 	else
@@ -157,7 +167,7 @@ function DmSearchby_name(name,num){
 			document.getElementsByTagName('head')[0].appendChild(script);
 		}
 	}
-	xmlhttp.open("GET","/danmu.php?f=search&name="+name+"&num="+num,true);
+	xmlhttp.open("GET","/danmu.php?f=search&name="+name+"&num="+num+"&page="+window.pageid,true);
 	xmlhttp.send();
 
 }
@@ -188,7 +198,8 @@ function DmAutoLoad(){
 	if(Request['spid']='')
 	  DmGetby_spid(Request['spid']);
 	else 
-	  DmGetby_name(Request['name']);
+	  //DmGetby_name(Request['name']);
+	  DmSearchby_name(Request['name'],Request['num']);
 }
 
 function avgo(){

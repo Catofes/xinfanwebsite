@@ -7,7 +7,6 @@ function get_sign($params, $key) {
 	ksort($params);
 	reset($params);
 	foreach ($params as $k => $v) {
-		// rawurlencode 返回的转义数字必须为大写( 如%2F )
 		$_data[] = $k . '=' . rawurlencode($v);
 	}
 	$_sign = implode('&', $_data);
@@ -25,10 +24,10 @@ function geturl_av($av,$page=1) {
 	return "http://api.bilibili.cn/view?".$params['params']."&sign=".$params['sign'];
 }
 
-function search($name,$num='') {
+function search($name,$num='',$page=1) {
 	global $App_Key;
 	global $App_Secret;
-	$params=['type'=>'jsonp','appkey'=>$App_Key,'pagesize'=>1,'keyword'=>$name." ".$num];
+	$params=['type'=>'jsonp','appkey'=>$App_Key,'pagesize'=>1,'page'=>$page,'keyword'=>$name." ".$num];
 	$params=get_sign($params,$App_Secret);
 	return "http://api.bilibili.cn/search?".$params['params']."&sign=".$params['sign'];
 }
@@ -49,6 +48,15 @@ function spsearch($name) {
 	return "http://api.bilibili.cn/sp?".$params['params']."&sign=".$params['sign'];
 }
 
+function ban($id) {
+	global $App_Key;
+	global $App_Secret;
+	$params=['type'=>'jsonp','appkey'=>$App_Key,'spid'=>$id];
+	$params=get_sign($params,$App_Secret);
+	return "http://api.bilibili.cn/bangumi?".$params['params']."&sign=".$params['sign'];
+}
+
+
 if($_GET['f']=='gav'){
 	if($_GET['page']>1)
 		print geturl_av($_GET['av'],$_GET['page']);
@@ -58,8 +66,8 @@ if($_GET['f']=='gav'){
 
 if($_GET['f']=='search'){
 	if(!$_GET['num'])
-		print search($_GET['name']);
-	else print search($_GET['name'],$_GET['num']);
+		print search($_GET['name'],'',$_GET['page']);
+	else print search($_GET['name'],$_GET['num'],$_GET['page']);
 	exit;
 }
 
@@ -70,6 +78,10 @@ if($_GET['f']=='spv'){
 
 if($_GET['f']=='sps'){
 	print spsearch($_GET['name']);
+	exit;
+}
+if($_GET['f']=='b'){
+	print ban($_GET['id']);
 	exit;
 }
 ?>
