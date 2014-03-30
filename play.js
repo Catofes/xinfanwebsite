@@ -167,7 +167,10 @@ function DmSearchby_name(name,num){
 			document.getElementsByTagName('head')[0].appendChild(script);
 		}
 	}
-	xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(name)+"&num="+num+"&page="+window.pageid,true);
+	if(!window.thename)
+	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(name)+"&num="+num+"&page="+window.pageid,true);
+	else
+	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(window.thename)+"&num=&page="+window.pageid,true);
 	xmlhttp.send();
 
 }
@@ -213,4 +216,34 @@ function avgo(){
 		  DmGetby_av(avcode,1);
 	}else
 	  DmAutoLoad();
+}
+
+function onInputFileChange() {  
+	var file = document.getElementById('file').files[0];  
+	var url = URL.createObjectURL(file);  
+	console.log(file.name);
+	window.thevideojs.src(url);
+}
+window.settinghidden=true;
+
+function setting()
+{
+	if(window.settinghidden){
+		$('#setting').animate({"height":"100px"},"slow"); 
+		window.settinghidden=false;
+	}
+	else{
+		$('#setting').animate({"height":"0px"},"slow"); 
+		window.settinghidden=true;
+	}
+};
+
+function changeTitle()
+{
+	var thename = document.getElementById("changetitle").value;
+	if(thename){
+		window.pageid=0;
+		window.thename=thename;
+		$("#filetitle").text(thename);
+	}
 }

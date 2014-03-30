@@ -24,7 +24,9 @@ header('Access-Control-Allow-Credentials:true');
 window.addEventListener("load",function(){
 	window.thevideojs = videojs("example_video_1");
 	thevideojs.ABP();
-});
+}
+);
+
 </script>
 </head>
 <body>
@@ -47,7 +49,6 @@ window.addEventListener("load",function(){
 				<ul class="nav navbar-nav navbar-right">
 					<li><a onclick="setting()" >设置</a></li>
 				</ul>
-
 			</div>
 		</div>
 	</div>
@@ -78,7 +79,7 @@ window.addEventListener("load",function(){
 	</div>
 	<div class="container">
 		<div class="jumbotron" style="padding-top:5px;padding-bottom:10px;">
-			<b style="margin-top:1px" id="filetitle"><? echo $_GET["name"]."  ".$_GET["num"];?></b>
+			<b id="filetitle" style="margin-top:1px">本地播放</b>
 			<form class="form-inline" role="form" style="float:right">
 				<div class="form-group">
 					<label class="sr-only" for="exampleInputEmail2">AVCode</label>
@@ -99,25 +100,22 @@ window.addEventListener("load",function(){
 		<video id="example_video_1" class="video-js vjs-default-skin"
 		controls preload="auto"width="auto" height="480"
 		data-setup='{"example_option":true}'>
-		<source src=<?php echo "/files/".rawurlencode($_GET["file"]);?> type='video/mp4' />
-
 	</div>
-</div>
-</div>
-<div class="footer">
-	<div class="container">
-		<p class="text-muted credit">
-		Provide by
-		<a href="about.php">Catofes</a>
-		.Generate time:
-		<? echo $timeb=microtime()-$timea;?>
-		s  
-		</p>
+	<div class="footer">
+		<div class="container">
+			<p class="text-muted credit">
+			Provide by
+			<a href="about.php">Catofes</a>
+			.Generate time:
+			<? echo $timeb=microtime()-$timea;?>
+			s  
+			</p>
+		</div>
 	</div>
-</div>
-<script src="/dist/jquery-1.7.1.min.js"></script>
-<script src="dist/js/bootstrap.min.js"></script>
-<script src="dist/bootstrap.file-input.js"></script>
+	<script src="/dist/jquery-1.7.1.min.js"></script>
+	<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="dist/bootstrap.file-input.js"></script>
 <script>
 $('input[type=file]').bootstrapFileInput();
 </script>
