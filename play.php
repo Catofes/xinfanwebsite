@@ -13,8 +13,8 @@ header('Access-Control-Allow-Credentials:true');
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link href="dist/css/bootstrap.css" rel="stylesheet">
-		<script src="/videojsABdm/CommentCore.js"></script>
-		<script src="/videojsABdm/Parsers.js"></script>
+		<script src="/videojsABdm/CommentCoreLibrary.js"></script>
+		<script src="/videojsABdm/BilibiliFormat.js"></script>
 		<link href="/video-js/video-js.css" rel="stylesheet">
 		<script src="/video-js/video.js"></script>
 		<link href="/videojsABdm/videojs_ABdm.css" rel="stylesheet">
@@ -40,7 +40,7 @@ window.addEventListener("load",function(){
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.php">一月新番</a></li>
+					<li><a href="index.php">四月新番</a></li>
 					<li><a href="list.php">文件列表</a></li>
 					<li><a href="localplay.php">本地播放</a><li>
 				</ul>
@@ -86,7 +86,7 @@ window.addEventListener("load",function(){
 				</div>
 				<div class="form-group">
 					<label class="sr-only" for="exampleInputPassword2">Page</label>
-					<input type="password" class="form-control" id="thepage" placeholder="Page">
+					<input type="text" class="form-control" id="thepage" placeholder="Page">
 				</div>
 				<button type="button" class="btn btn-default" onclick="avgo()">Go!</button>
 			</form>

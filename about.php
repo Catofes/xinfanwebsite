@@ -24,7 +24,7 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="index.php">一月新番</a></li>
+						<li><a href="index.php">四月新番</a></li>
 						<li><a href="list.php">文件列表</a></li>
 						                   <li><a href="localplay.php">本地播放</a><li>
 

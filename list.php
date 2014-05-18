@@ -98,7 +98,7 @@ function showother($filelist,$path=""){
 	}	
 }	
 
-function CheckDir($post)
+function CheckDir($post,$force)
 {
 	global $DIR;
 	$linpath="";
@@ -109,6 +109,7 @@ function CheckDir($post)
 		echo "This is not a folder.<br></body></html>";
 		exit();
 	}
+	if($force==0)return $path;
 	chdir($DIR.$path);
 	if(strpos(getcwd()."/",$DIR)===false)
 	{
@@ -118,7 +119,7 @@ function CheckDir($post)
 	return $path;
 }
 
-$path=CheckDir($_GET);
+$path=CheckDir($_GET,0);
 $filelist=getlist($DIR.$path,$path);
 ?>
 
@@ -157,7 +158,7 @@ $(function(){
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.php">一月新番</a></li>
+					<li><a href="index.php">四月新番</a></li>
 					<li class="active"><a href="">文件列表</a></li>
 				                   <li><a href="localplay.php">本地播放</a><li>
 

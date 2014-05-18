@@ -99,7 +99,7 @@ $.extend({
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-					<a href="">一月新番</a>
+					<a href="">四月新番</a>
 					</li>
 					<li>
 					<a href="list.php">文件列表</a>
@@ -117,7 +117,7 @@ $.extend({
 				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">下拉菜单</button>
 				</p>
 				<div class="jumbotron">
-					<h1>一月新番</h1>
+					<h1>四月新番</h1>
 				</div>
 				<div class="row">
 <?php
@@ -141,13 +141,17 @@ while (list($key, $val) = each($fan_list))
 		$zimuzu=zhengze($linshi[0],0,$TAG,$CUT_NUM);
 		echo						"<h4>".$name."	[".$zimuzu."]</h4><ul class=\"pagination\">";
 		reset($linshi);
-		while (list($key_2,$val_2)=each($linshi))
+		while (list($key_2,$val_2)=each($linshi)){
+			$num=zhengze($val_2,2,$TAG,$CUT_NUM);
+			if(!is_numeric(trim(eregi_replace("[^0-9]","",$num))))
+				$num=substr(trim(eregi_replace("[^0-9]","",$val_2)),0,2);  
 			if(zhengze($val_2,1,$TAG,$CUT_NUM)===$name)
-				echo					"<li><a href=\"play.php?file=".rawurlencode($val_2)."&name=".rawurlencode($val[1])."&num=".zhengze($val_2,2,$TAG,$CUT_NUM)."&truename=".rawurlencode($val[1])."\">".zhengze($val_2,2,$TAG,$CUT_NUM)."</a></li>";
+				echo					"<li><a href=\"play.php?file=".rawurlencode($val_2)."&name=".rawurlencode($val[1])."&num=".$num."&truename=".rawurlencode($val[1])."\">".$num."</a></li>";
 			else{
 				$name=zhengze($val_2,1,$TAG,$CUT_NUM);
-				echo				"</ul><h4>".$name."	[".$zimuzu."]</h4><ul class=\"pagination\"><li><a href=\"play.php?file=".rawurlencode($val_2)."&name=".rawurlencode($val[1])."&num=".zhengze($val_2,2,$TAG,$CUT_NUM)."&truename=".rawurlencode($val[1])."\">".zhengze($val_2,2,$TAG,$CUT_NUM)."</a></li>";
+				echo				"</ul><h4>".$name."	[".$zimuzu."]</h4><ul class=\"pagination\"><li><a href=\"play.php?file=".rawurlencode($val_2)."&name=".rawurlencode($val[1])."&num=".$num."&truename=".rawurlencode($val[1])."\">".$num."</a></li>";
 			}
+		}
 	}	
 	echo						"</ul>
 		</div>

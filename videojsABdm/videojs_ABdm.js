@@ -21,6 +21,7 @@ function ABPinit(){
 			this.cmManager.display = true;
 			this.cmManager.init();
 			this.cmManager.clear();
+			this.cmManager.def.globalScale=2;	
 			video.cmManager=this.cmManager;
 			window.cmManager=this.cmManager;
 			var lastPosition = 0;
@@ -99,6 +100,7 @@ function ABPinit(){
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send();
 		var cm = this.cmManager;
+		var cmvideo = this.el().children[0];
 		xmlhttp.onreadystatechange = function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				if(navigator.appName == 'Microsoft Internet Explorer'){
@@ -106,9 +108,11 @@ function ABPinit(){
 					f.async = false;
 					f.loadXML(xmlhttp.responseText);
 					cm.load(BilibiliParser(f));
+					cm.seek(cmvideo.currentTime*1000);
 					callback(true);
 				}else{
 					cm.load(BilibiliParser(xmlhttp.responseXML));
+					cm.seek(cmvideo.currentTime*1000);
 					callback(true);
 				}   
 			}else

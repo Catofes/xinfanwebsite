@@ -532,7 +532,11 @@ CommentManager.prototype.time = function(time){
 			return;
 	}else this.lastPos = time;
 	for(;this.position < this.timeline.length;this.position++){
-		if(this.validate(this.timeline[this.position]) && this.timeline[this.position]['stime']<=time) this.sendComment(this.timeline[this.position]);
+		if(this.validate(this.timeline[this.position]) && this.timeline[this.position]['stime']<=time)
+		{
+			console.log(this.position);
+			this.sendComment(this.timeline[this.position]);
+		}
 		else break;
 	}
 };
