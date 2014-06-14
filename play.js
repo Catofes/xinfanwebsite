@@ -136,7 +136,7 @@ function j_Dmspt(data){
 
 function j_DmSearch(data){
 	if(data.code==0){
-		if(data.property.result>0){
+		if(data.result.length>0){
 			echoinfo(305);
 			if(window.pageid==data.page)
 			  window.pageid=0;
