@@ -37,6 +37,8 @@ function fenge($file,$path,$xiangduipath)
 			}
 			$cname=str_replace("_"," ",$cname);
 			$num=explode("v",substr($linshi[2],1),2)[0];
+			if($num=="mp4")
+				$num=substr(trim(eregi_replace("[^0-9]","",$file)),0,2);	
 			if(!is_numeric(trim(eregi_replace("[^0-9]","",$num))))
 				$num=substr(trim(eregi_replace("[^0-9]","",$file)),0,2);   	
 			return array("type"=>"mp4","name"=>substr($linshi[1],1),"num"=>$num,"zimu"=>substr($linshi[0],1),"cname"=>$cname,"file"=>$file);
