@@ -27,7 +27,10 @@ function geturl_av($av,$page=1) {
 function search($name,$num='',$page=1) {
 	global $App_Key;
 	global $App_Secret;
-	$params=['type'=>'jsonp','appkey'=>$App_Key,'pagesize'=>1,'page'=>$page,'keyword'=>$name." ".$num];
+	if($_GET['xf']=="true")
+		$params=['type'=>'jsonp','appkey'=>$App_Key,'pagesize'=>1,'page'=>$page,'keyword'=>$name." ".$num." @新番"];
+	else
+		$params=['type'=>'jsonp','appkey'=>$App_Key,'pagesize'=>1,'page'=>$page,'keyword'=>$name." ".$num];
 	$params=get_sign($params,$App_Secret);
 	return "http://api.bilibili.cn/search?".$params['params']."&sign=".$params['sign'];
 }

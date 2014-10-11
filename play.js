@@ -136,10 +136,10 @@ function j_Dmspt(data){
 
 function j_DmSearch(data){
 	if(data.code==0){
+		if(window.pageid>data.page)
+		  window.pageid=0;
 		if(data.result.length>0){
 			echoinfo(305);
-			if(window.pageid==data.page)
-			  window.pageid=0;
 			if(!data.result[0].aid){
 				echoinfo(202);
 				return;
@@ -153,7 +153,7 @@ function j_DmSearch(data){
 function DmSearchby_name(name,num){
 	var xmlhttp;
 	if(!window.pageid)
-		window.pageid=0;
+	  window.pageid=0;
 	window.pageid++;
 	if (window.XMLHttpRequest)
 	  xmlhttp=new XMLHttpRequest();
@@ -168,9 +168,9 @@ function DmSearchby_name(name,num){
 		}
 	}
 	if(!window.thename)
-	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(name)+"&num="+num+"&page="+window.pageid,true);
+	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(name)+"&num="+num+"&page="+window.pageid+"&xf=true",true);
 	else
-	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(window.thename)+"&num=&page="+window.pageid,true);
+	  xmlhttp.open("GET","/danmu.php?f=search&name="+encodeURI(window.thename)+"&num=&page="+window.pageid+"&xf=false",true);
 	xmlhttp.send();
 
 }

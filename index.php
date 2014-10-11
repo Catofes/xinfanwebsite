@@ -4,7 +4,6 @@ $timea=microtime();
 $fanfile=fopen("fanlist.db","r");
 $fan_list=unserialize(fread($fanfile,filesize("fanlist.db")));
 fclose($fanfile);
-
 function switchname($name,$fan_list)
 {
 	reset($fan_list);
@@ -99,7 +98,7 @@ $.extend({
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active">
-					<a href="">四月新番</a>
+					<a href="">新番</a>
 					</li>
 					<li>
 					<a href="list.php">文件列表</a>
@@ -117,7 +116,7 @@ $.extend({
 				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">下拉菜单</button>
 				</p>
 				<div class="jumbotron">
-					<h1>四月新番</h1>
+					<h1>新番</h1>
 				</div>
 				<div class="row">
 <?php
